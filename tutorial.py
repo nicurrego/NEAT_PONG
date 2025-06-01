@@ -31,7 +31,18 @@ class PongGame:
             self.game.draw(False, True)
             pygame.display.update()
 
-    pygame.quit()
+        pygame.quit()
+
+    def train_ai(self, genome1, genome2, config):
+        run = True
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    quit()
+
+            self.game.loop()
+            self.game.draw()
+            pygame.display.update()
 
 def eval_genomes(genomes, config):
     width, height = 700, 500
@@ -45,7 +56,7 @@ def eval_genomes(genomes, config):
             genome2.fitness = 0 if genome2.fitness == None else genome2.fitness
             game = PongGame(window, width, height)
             game.train_ai(genome1, genome2, config)
-            
+
 
 
 def run_neat(config):
