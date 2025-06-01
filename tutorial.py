@@ -21,6 +21,7 @@ while run:
     if keys[pygame.K_s]:
         game.move_paddle(left=True, up=False)
 
-    game.loop()
+    game_info = game.loop()
+    print(game_info.left_score, game_info.right_score)
     game.draw(False, True)
     pygame.display.update()
