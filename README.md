@@ -1,6 +1,6 @@
 # NEAT\_PONG
 
-!\[player vs. AI]\(assets/ping\_pong.gif)
+![player vs. AI](assets/ping\_pong.gif)
 
 A Python implementation of the classic Pong game trained via [NEAT](https://github.com/CodeReclaimers/neat-python).
 Original code from **[techwithtim](https://github.com/techwithtim)**
