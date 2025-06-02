@@ -69,12 +69,13 @@ class PongGame:
             self.game.draw(draw_score=False, draw_hits=True)
             pygame.display.update()
 
-            if game_info.left_score >= 1 or game_info.right_score >= 1:
+            if game_info.left_score >= 1 or game_info.right_score >= 1 or game_info.left_hits > 50:
                 self.calculate_fitness(genome1, genome2, game_info)
                 break
             
     def calculate_fitness(self, genome1, genome2, game_info):
-        pass
+        genome1.fitness += game_info.left_hits
+        genome2.fitness += game_info.right_hits
 
 
 def eval_genomes(genomes, config):
