@@ -2,6 +2,7 @@ import pygame
 from pong import Game
 import neat
 import os
+import pickle
 
 class PongGame:
     def __init__(self, window, width, height):
@@ -106,14 +107,28 @@ def eval_genomes(genomes, config):
 
 
 def run_neat(config):
-    # p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-27')
-    p = neat.Population(config)
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-15')
+    # p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
 
-    winner = p.run(eval_genomes, 50)
+    winner = p.run(eval_genomes, 1)
+    with open("best.pickle", "wb") as f:
+        pickle.dump(winner, f)
+    
+def test_ai(config):
+    width, height = 700, 500
+    window = pygame.display.set_mode((width, height))
+
+    with open("best.pickle", "rb") as f:
+        winner = pickle.load(f)
+
+    game = PongGame(window, width, height)
+    game.test_ai(winner, config)
+
+    
     
 if __name__ == "__main__":
     local_dir = os.path.dirname(__file__)
@@ -123,3 +138,4 @@ if __name__ == "__main__":
                          neat.DefaultSpeciesSet,neat.DefaultStagnation,
                            config_path)
     run_neat(config)
+    # test_ai(config)
