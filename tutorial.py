@@ -66,7 +66,7 @@ class PongGame:
             print(output1, output2)
 
             game_info = self.game.loop()
-            self.game.draw()
+            self.game.draw(draw_score=False, draw_hits=True)
             pygame.display.update()
 
             if game_info.left_score >= 1 or game_info.right_score >= 1:
