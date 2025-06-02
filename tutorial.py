@@ -10,7 +10,9 @@ class PongGame:
         self.rigth_paddle = self.game.right_paddle
         self.ball = self.game.ball
 
-    def test_ai(self):
+    def test_ai(self, genome, config):
+        net = neat.nn.FeedForwardNetwork.create(genome, config)
+
         run = True
         clock = pygame.time.Clock()
         while run:
@@ -26,9 +28,19 @@ class PongGame:
             if keys[pygame.game.K_s]:
                 self.game.move_paddle(left=True, up=False)
 
+            output = net.activate((self.rigth_paddle.y, self.ball.y, abs(self.rigth_paddle.x - self.ball.x)))
+            decision = output.index(max(output))
+
+            if decision == 0:
+                pass
+            elif decision == 1:
+                self.game.move_paddle(left=False,up=True)
+            else:
+                self.game.move_paddle(left=False, up=False)
+
             game_info = self.game.loop()
             print(game_info.left_score, game_info.right_score)
-            self.game.draw(False, True)
+            self.game.draw(True, False)
             pygame.display.update()
 
         pygame.quit()
