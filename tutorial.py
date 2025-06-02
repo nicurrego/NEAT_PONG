@@ -26,7 +26,7 @@ class PongGame:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_w]:
                 self.game.move_paddle(left=True, up=True)
-            if keys[pygame.game.K_s]:
+            if keys[pygame.K_s]:
                 self.game.move_paddle(left=True, up=False)
 
             output = net.activate((self.rigth_paddle.y, self.ball.y, abs(self.rigth_paddle.x - self.ball.x)))
@@ -137,5 +137,5 @@ if __name__ == "__main__":
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet,neat.DefaultStagnation,
                            config_path)
-    run_neat(config)
-    # test_ai(config)
+    # run_neat(config)
+    test_ai(config)
